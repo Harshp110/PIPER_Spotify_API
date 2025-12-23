@@ -147,7 +147,7 @@ st_lottie(
 
 if 'access_token' in st.session_state:
     st.write("#### Select a :red[page] from the :red[sidebar] to get started.")             
-st.header("Made by: :green[Vyankatesh Deshpande] | Btech CSE :green[IIT Jodhpur]")
+st.header("Made by: :green[Harsh S. Pandav] | Btech CSE :green[IIT Jodhpur]")
 st.image('web_app/spotify_image.png', caption='PIPER', use_column_width=True) 
 
 
