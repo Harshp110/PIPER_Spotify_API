@@ -1,15 +1,15 @@
 import streamlit as st
+import requests
 from requests_oauthlib import OAuth2Session
 from requests.auth import HTTPBasicAuth
-import requests
 
-# ------------------ PAGE CONFIG ------------------
+# ================= PAGE CONFIG =================
 st.set_page_config(
     page_title="PIPER",
     layout="wide"
 )
 
-# ------------------ BACKGROUND CSS ------------------
+# ================= BACKGROUND CSS =================
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"]{
@@ -23,7 +23,7 @@ page_bg_img = """
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# -------- FORCE TEXT VISIBILITY --------
+# ================= FORCE TEXT VISIBILITY =================
 st.markdown("""
 <style>
 h1, h2, h3, h4, h5, h6, p, span, div, a {
@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a {
 </style>
 """, unsafe_allow_html=True)
 
-# ------------------ SPOTIFY CONFIG ------------------
+# ================= SPOTIFY CONFIG =================
 AUTH_URL = "https://accounts.spotify.com/authorize"
 TOKEN_URL = "https://accounts.spotify.com/api/token"
 API_BASE_URL = "https://api.spotify.com/v1/"
@@ -43,12 +43,11 @@ SCOPE = [
     "playlist-read-collaborative"
 ]
 
-# --------- SECRETS (DO NOT HARD CODE) ----------
-SPOTIFY_CLIENT_ID = st.secrets["SPOTIFY_CLIENT_ID"]
-SPOTIFY_CLIENT_SECRET = st.secrets["SPOTIFY_CLIENT_SECRET"]
+# ================= SECRETS (CORRECT & FINAL) =================
+CLIENT_ID = st.secrets["SPOTIFY_CLIENT_ID"]
+CLIENT_SECRET = st.secrets["SPOTIFY_CLIENT_SECRET"]
 
-
-# ------------------ FUNCTIONS ------------------
+# ================= FUNCTIONS =================
 def login():
     spotify = OAuth2Session(
         CLIENT_ID,
@@ -75,7 +74,7 @@ def callback():
             st.session_state.access_token = data["access_token"]
             st.success("Login successful!")
         else:
-            st.error("Failed to authenticate.")
+            st.error("Failed to authenticate with Spotify.")
 
 def get_user():
     headers = {
@@ -85,13 +84,12 @@ def get_user():
     user = r.json()
     st.success(f"Logged in as **{user['display_name']}**")
 
-# ------------------ UI ------------------
-st.title("Welcome to the **PIPER App** 🎧")
+# ================= UI =================
+st.title("Welcome to **PIPER** 🎧")
 
-st.write(
-    "Send your Spotify email if you need API allowlist access."
-)
-st.write("📧 Contact: **harshpandav110@gmail.com**")
+st.write("My Email: harshpandav110@gmail.com")
+st.write("If already added then ignore the above message!")
+st.write(":brown[Without Login you can use the emotion predictor!]")
 
 st.markdown("---")
 
