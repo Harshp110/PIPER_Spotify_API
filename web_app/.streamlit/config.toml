@@ -1,3 +1,2 @@
-[deprecation]
-showPyplotGlobalUse = false
-
+[server]
+pythonVersion = "3.10"
